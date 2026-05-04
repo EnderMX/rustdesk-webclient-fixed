@@ -1,0 +1,17 @@
+services:
+  rustdesk-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RUSTDESK_TAG: "fix-build"
+        RUSTDESK_REPO: "MonsieurBiche/rustdesk-web-client"
+        ENABLE_WSS: "true"
+        FLUTTER_VERSION: "3.22.1"
+        BACKEND_HOST: "${BACKEND_HOST:-YOUR_SERVER_IP}"
+    container_name: rustdesk-webclient
+    ports:
+      - "8080:80"
+    environment:
+      - BACKEND_HOST=${BACKEND_HOST:-YOUR_SERVER_IP}
+    restart: unless-stopped
